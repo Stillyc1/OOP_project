@@ -9,11 +9,12 @@ class Product:
 
     @classmethod
     def new_product(cls, params_product: dict):
-        cls.name = params_product["name"]
-        cls.description = params_product["description"]
-        cls.price = params_product["price"]
-        cls.quantity = params_product["quantity"]
-        return cls
+        return cls(
+            name=params_product["name"],
+            description=params_product["description"],
+            price=params_product["price"],
+            quantity=params_product["quantity"]
+        )
 
     @property
     def price(self):
@@ -21,7 +22,12 @@ class Product:
 
     @price.setter
     def price(self, prices):
-        if prices <= 0:
-            print("Цена не должна быть нулевая или отрицательная")
+        if prices < self.__price:
+            print(f"Вы точно хотите понизить цену с {self.__price} до {prices}? y/n\n")
+            user = input()
+            if user == "y":
+                if prices <= 0:
+                    print("Цена не должна быть нулевая или отрицательная")
+                    return
+                self.__price = prices
             return
-        self.__price = prices
