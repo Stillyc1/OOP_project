@@ -7,29 +7,29 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other):
+    def __add__(self, other) -> object:
         self.total = self.__price * self.quantity
-        self.total += (other.__price * other.quantity)
+        self.total += other.__price * other.quantity
         return self.total
 
     @classmethod
-    def new_product(cls, params_product: dict):
+    def new_product(cls, params_product: dict) -> object:
         return cls(
             name=params_product["name"],
             description=params_product["description"],
             price=params_product["price"],
-            quantity=params_product["quantity"]
+            quantity=params_product["quantity"],
         )
 
     @property
-    def price(self):
+    def price(self) -> object:
         return self.__price
 
     @price.setter
-    def price(self, prices):
+    def price(self, prices) -> None:
         if prices < self.__price:
             print(f"Вы точно хотите понизить цену с {self.__price} до {prices}? y/n\n")
             user = input()
