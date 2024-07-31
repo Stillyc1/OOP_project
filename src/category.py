@@ -15,11 +15,13 @@ class Category:
         return f"{self.name}, количество продуктов: {self.sum_product} шт."
 
     def add_product(self, new_products):
+        """Метод добавления нового продукта в класс category"""
         self.__products.append(new_products)
         self.product_count += 1
 
     @property
     def products(self) -> str:
+        """Метод для получения информации о продуктах в классе Category"""
         product_str = ""
         for product in self.__products:
             product_str += f"{str(product)}\n"
