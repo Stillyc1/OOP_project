@@ -1,7 +1,8 @@
+from src.base_category import BaseCategory
 from src.product import Product
 
 
-class Category:
+class Category(BaseCategory):
     category_count: int = 0
     product_count: int = 0
 
@@ -36,3 +37,12 @@ class Category:
     @property
     def list_products(self):
         return self.__products
+
+    def middle_price(self):
+        """Подсчет средней стоимости товаров в категории"""
+        try:
+            total_price_product = sum([product.price for product in self.__products])
+            middle_price = total_price_product / sum([product.quantity for product in self.__products])
+            return f"{round(middle_price, 2)} руб."
+        except ZeroDivisionError:
+            return 0

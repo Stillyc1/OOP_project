@@ -1,4 +1,9 @@
-class Product:
+from src.base_product import BaseProduct
+from src.exception_quantity import ExceptionQuantity
+from src.print_mixin import PrintMixin
+
+
+class Product(BaseProduct, PrintMixin):
     """Класс для создания класса продуктов"""
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
@@ -6,7 +11,10 @@ class Product:
         self.name = name
         self.description = description
         self.__price = price
+        if quantity <= 0:
+            raise ExceptionQuantity("Товар с нулевым количеством не может быть добавлен")
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self) -> str:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
